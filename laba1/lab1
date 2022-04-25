@@ -41,36 +41,4 @@ men:-man(X),write(X),nl,fail.
 
 children(X):-parent(X,Y),write(Y),nl,fail.
 
-mother(X,Y):-parent(X,Y),woman(X),write(yes),nl,fail.
-mother(X):-parent(Y,X),woman(Y),write(Y),nl,fail.
 
-father(X,Y):-parent(X,Y),man(X),write(yes),nl,fail.
-father(X):-parent(Y,X),man(Y),write(Y),nl,fail.
-
-brother(X,Y):-parent(Z,X),parent(Z,Y),man(X),man(Z),write(yes),nl,fail.
-brother(X):-parent(Z,X),parent(Z,Y),man(Y),man(Z),write(Y),nl,fail.
-
-wife(X,Y):-woman(X),parent(X,Z),parent(Y,Z),write(yes),nl,!,fail.
-wife(X):-man(X),parent(X,Z),parent(Y,Z),woman(Y),write(Y),nl,!,fail.
-
-
-grand_da(X,Y):-woman(X),parent(Y,Z),parent(Z,X),write(yes),nl,fail.
-grand_dats(X):-parent(X,Z),parent(Z,Y),woman(Y),write(Y),nl,fail.
-
-grand_ma_and_son(X,Y):-parent(X,Z),parent(Z,Y),woman(X),man(Y),write(yes),nl,fail;parent(Y,Z),parent(Z,X),woman(Y),man(X),write(yes),nl,fail.
-
-b_s(X,Y):-parent(Z,X),parent(Z,Y),man(Z),write(yes),nl,fail.
-b_s(X):-parent(Z,X),parent(Z,Y),man(Z),write(Y),nl,fail.
-
-grand_pa_and_son(X,Y):-parent(X,Z),parent(Z,Y),man(X),man(Y),write(yes),nl,fail;parent(Y,Z),parent(Z,X),man(Y),man(X),write(yes),nl,fail.
-
-uncle(X,Y):-parent(Z,Y),brother(X,Z),write(yes),nl,fail.
-uncle(X):-parent(Z,X),brother(Y,Z),write(Y),nl,fail.
-
-
-
-grand_pa(X,Y):-parent(X,Z),parent(Z,Y),man(X),write(yes),nl,!,fail.
-grand_pas(X):-parent(Z,X),parent(Y,Z),man(Y),write(Y),nl,fail.
-
-plem(X,Y):-parent(Z,X),parent(D,Z),parent(D,Y),man(X),write(yes),nl,!,fail.
-plem(X):-parent(Z,Y),parent(D,Z),parent(D,X),man(Y),man(D),write(Y),nl,fail.
