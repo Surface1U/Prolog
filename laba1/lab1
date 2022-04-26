@@ -45,6 +45,10 @@ son(X):-parent(X,Y),man(Y),write(Y).
 %12
 sister(X,Y):-parent(Z,X),parent(Z,Y),woman(X),!.
 sisters(X):-sister(Y,X), write(Y).
+%13
+grand_ma(X,Y):-parent(X,Z),parent(Z,Y),woman(X).
+grand_max(X):-grand_ma(Y,X),write(Y),nl,fail.
+
 
 
 
