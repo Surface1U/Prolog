@@ -53,6 +53,14 @@ grand_ma_and_da(X,Y):-(
     parent(X,Z),parent(Z,Y),man(X),woman(Y);
     parent(Y,Z),parent(Z,X),woman(X),man(Y)
 ).
+%15
+maxup(X,X):-X<10,!.
+maxup(X,Max):-
+    X1 is X div 10,
+    X2 is X mod 10,
+
+maxup(X1,Max1),
+(X2<Max1, Max is Max1; Max is X2).
 
 
 
