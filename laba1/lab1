@@ -48,6 +48,11 @@ sisters(X):-sister(Y,X), write(Y).
 %13
 grand_ma(X,Y):-parent(X,Z),parent(Z,Y),woman(X).
 grand_max(X):-grand_ma(Y,X),write(Y),nl,fail.
+%14
+grand_ma_and_da(X,Y):-(
+    parent(X,Z),parent(Z,Y),man(X),woman(Y);
+    parent(Y,Z),parent(Z,X),woman(X),man(Y)
+).
 
 
 
