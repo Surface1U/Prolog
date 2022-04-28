@@ -82,6 +82,18 @@ sm(X,Y):-X1 is X mod 10, X2 is X div 10,sm(X2,Y1),Y is Y1+X1,
     0 is X1 mod 3,!.
 sm(X,Y):-X2 is X div 10,sm(X2,Y).
 
+%19
+fib(1,1).
+fib(0,0).
+fib(X,Y):-
+    X>1,X1 is X-1,
+    X2 is X-2,
+    fib(X1,Y1),
+    fib(X2,Y2),
+    Y is Y1+Y2.
+
+%20
+
 
 
 
