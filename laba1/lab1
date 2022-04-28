@@ -75,6 +75,13 @@ maxdown(X,C,Max):-
     maxdown(X1,D1,Max);
     X2 is X div 10,
     maxdown(X2,C,Max).
+    
+%17
+sm(0,0):-!.
+sm(X,Y):-X1 is X mod 10, X2 is X div 10,sm(X2,Y1),Y is Y1+X1,
+    0 is X1 mod 2,!.
+sm(X,Y):-X2 is X div 10,sm(X2,Y).
+
 
 
 
