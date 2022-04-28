@@ -93,6 +93,13 @@ fib(X,Y):-
     Y is Y1+Y2.
 
 %20
+fib1(N,X):-fib1(0,1,1,N,X).
+ fib1(_,Res,N,N,Res):-!.
+fib1(X1,X2,I,N,Res):-
+    X is X1+X2,
+    I1 is I+1,
+    fib1(X1,X,I1,N,Res).
+
 
 
 
