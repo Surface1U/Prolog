@@ -99,6 +99,18 @@ fib1(X1,X2,I,N,Res):-
     X is X1+X2,
     I1 is I+1,
     fib1(X1,X,I1,N,Res).
+    
+%18
+sum(X,R):-sum(X,0,R).
+sum(0,T,T):-!.
+sum(X,P,R):-D is X mod 10,
+    0 is D mod 3,
+    P1 is (D+P),
+    X1 is X div 10,
+    sum(X1,P1,R);
+    X2 is X div 10,
+    sum(X2,P,R).
+
 
 
 
