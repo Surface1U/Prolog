@@ -1,3 +1,5 @@
+%11
+
 nod(N,0,N):-!.
 nod(N,M,R):-M1 is N mod M,N1 is M,nod(N1,M1,R).
 
