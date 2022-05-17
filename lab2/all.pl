@@ -41,3 +41,61 @@ codwsc(COUNT_CROSS_SIMPLE,NUM,DEL):-
         codwsc(COUNT_CROSS_SIMPLE,NUM1,DEL)
     ),
     !.
+    
+    countOfNumWhatCanBeSumOfTwoOver(X):- conwcb(X, 19999,0).
+
+conwcb(COUNT, 23,R):-COUNT is R,!.
+conwcb(COUNT, A,R):-
+    A1 is A-1,
+    write(A), nl,
+    (
+        testSum(A,FLAG),
+        FLAG is 0,
+        R1 is R+1,
+        conwcb(COUNT, A1,R1);
+        conwcb(COUNT, A1,R)
+    ),
+    !.
+
+testSum(NUM, FLAG):- tswo(FLAG,NUM,0).
+
+tswo(F,A,B):-
+    A>=B,
+    A1 is A-1,
+    B1 is B+1,
+    (
+        isOverNum(A,FLAG1),
+        1 is FLAG1,
+        isOverNum(B,FLAG2),
+        1 is FLAG2,
+        F is 1;
+        tswo(F,A1,B1)
+    ),
+    !;
+    F is 0,
+    !.
+
+isOverNum(A,FLAG):-
+    A>=12,
+    sumOfDel(A,S),
+    S>A,
+    FLAG is 1;
+    FLAG is 0.
+
+sumOfDel(A,SUM):- A1 is A-1,sod(SUM,A,A1,0).
+
+sod(SUM,A,0,S):-SUM is S,!.
+sod(SUM,A,1,S):-SUM is S,!.
+sod(SUM,A,I,S):-
+    I1 is I-1,
+    (
+        0 is A mod I,
+        S1 is S+I,
+        sod(SUM,A,I1,S1);
+        sod(SUM,A,I1,S)
+    ),
+    !.
+%4
+len([],0).
+len([_|T],X):-len(T,X1),X is X1+1.
+
