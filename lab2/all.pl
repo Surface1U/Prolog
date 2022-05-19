@@ -99,3 +99,29 @@ sod(SUM,A,I,S):-
 len([],0).
 len([_|T],X):-len(T,X1),X is X1+1.
 
+%5 Дан целочисленный массив. Необходимо найти количество элементов, расположенных после последнего максимального.
+append([],X,X).
+append([X|T],Y,[X|T1]) :- append(T,Y,T1).
+
+readList(X,Y):-readList([],X,0,Y).
+readList(A,A,G,G):-!.
+readList(A,B,C,D):- C1 is C+1,read(X),append(A,[X],A1),readList(A1,B,C1,D).
+
+writeList([]):-!.
+writeList([H]):-write(H).
+writeList([H|T]):- write(H),write(' '),writeList(T).
+
+maxIndexInList([H|T],Max,IndexMax):- maxIndexInList([H|T],H,Max,0,IndexMax,0).
+maxIndexInList([],NowMax,Max,NowIndex,IndexMax,Index):-Max is NowMax,IndexMax is NowIndex,!.
+maxIndexInList([H|T],NowMax,Max,NowIndex,IndexMax,Index):-
+    Index1 is Index+1,
+    (
+        H >= NowMax,
+        maxIndexInList(T,H,Max,Index,IndexMax,Index1);
+        maxIndexInList(T,NowMax,Max,NowIndex,IndexMax,Index1)
+    ),!.
+
+countAfterMax([Head|Tail],COUNT):- maxIndexInList([Head|Tail],Max,IndexMax), len([Head|Tail],Length), COUNT is (Length-1-IndexMax).
+
+task5:- read(N),readlist(List,N),countAfterMax(List,Count),write(Count),!.
+
