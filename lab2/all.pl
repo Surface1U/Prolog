@@ -195,3 +195,16 @@ swapBetweenMinAndMax(List,NewList):-
     append(FSPart,ThirdPart,NewList).
 
 task6:- read(N),readList(List,N),swapBetweenMinAndMax(List,NewList),writeList(NewList),!.
+
+%7 Дан целочисленный массив и интервал a..b. Необходимо найти количество элементов в этом интервале.
+countElemBetweenAB([],A,B,Count):-Count is 0,!.
+countElemBetweenAB([H|T],A,B,Count):-
+    (
+        H<B,
+        H>A,
+        countElemBetweenAB(T,A,B,Count1),
+        Count is Count1+1;
+        countElemBetweenAB(T,A,B,Count)
+    ).
+
+task7:- read(N),readList(List,N),read(A),read(B),countElemBetweenAB(List,A,B,Count),write(Count),!.
