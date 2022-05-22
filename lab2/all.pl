@@ -264,3 +264,16 @@ secondMinIndexInList([H|T],NowMin,Min,NowIndex,IndexMin,Index,FIndexMin):-
     ),!.
 
 task9:- read(N),readList(List,N),listBetweenMins(List,NewList),listleng(NewList,Length),write(Length),!
+%10 Дан целочисленный массив и интервал a..b. Необходимо проверить наличие максимального элемента массива в этом интервале.
+ifMaxBetweenAB(List,A,B,Flag):-
+    maxIndexInList(List,Max,IndexMax),
+    (
+        A<Max,
+        B>Max,
+
+        Flag is 1;
+
+        Flas is 0
+    ).
+
+task10:- read(N),readList(List,N),read(A),read(B),ifMaxBetweenAB(List,A,B,Flag),write(Flag),!.
