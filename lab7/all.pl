@@ -239,3 +239,47 @@ task9:-
     C<D,
     write(Kortej),
     !.
+%10 
+/* Пятеро детей Алик, Боря, Витя, Лена и Даша приехали в ла-
+герь из 5 разных городов: Харькова, Умани, Полтавы, Славянска и Краматор-
+ска. Есть 4 высказывания: 1) Если Алик не из Умани, то Боря из Краматорска.
+2) Или Боря, или Витя приехали из Харькова. 3) Если Витя не из Славянска, то
+Лена приехала из Харькова. 4) Или Даша приехала из Умани, или Лена из Кра-
+маторска. Кто откуда приехал?
+*/
+task10:- 
+    Kortej=[_,_,_,_,_],
+    inList(Kortej,[alik,_]),
+    inList(Kortej,[borya,_]),
+    inList(Kortej,[vitya,_]),
+    inList(Kortej,[lena,_]),
+    inList(Kortej,[dasha,_]),
+    
+    inList(Kortej,[_,harkov]),
+    inList(Kortej,[_,uman]),
+    inList(Kortej,[_,poltava]),
+    inList(Kortej,[_,slavansk]),
+    inList(Kortej,[_,kramatorsk]),
+
+    (
+        not(inList(Kortej,[alik,uman])),
+        inList(Kortej,[borya,kramatorsk]);
+
+        inList(Kortej,[alik,uman])
+    ),
+    (
+        inList(Kortej,[borya,harkov]);
+        inList(Kortej,[vitya,harkov])
+    ),
+    (
+        not(inList(Kortej,[vitya,slavansk])),
+        inList(Kortej,[lena,harkov]);
+
+        inList(Kortej,[vitya,slavansk])
+    ),
+    (
+        inList(Kortej,[dasha,uman]);
+        inList(Kortej,[lena,kramatorsk])
+    ),
+    write(Kortej),
+    !.
