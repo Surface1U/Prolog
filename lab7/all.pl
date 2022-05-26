@@ -114,3 +114,4 @@ task4:-
     not(inList(Hairs,[rijov,rij])),
     write(Hairs),
     !.
+
