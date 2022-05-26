@@ -115,3 +115,33 @@ task4:-
     write(Hairs),
     !.
 
+%5 Три подруги вышли в белом, зеленом и синем платьях и туфлях. Известно, что только у Ани цвета платья и туфлей совпадали.
+% Ни туфли, ни платье Вали не были белыми. Наташа была в зеленых туфлях. Определить цвета платья и туфель на каждой из подруг.
+task5:- 
+    Kortej=[_,_,_],
+    inList(Kortej,[anya,X,X]),
+    inList(Kortej,[valya,_,_]),
+    inList(Kortej,[nastya,zel,_]),
+    inList(Kortej,[_,bel,_]),
+    inList(Kortej,[_,sin,_]),
+    inList(Kortej,[_,zel,_]),
+    inList(Kortej,[_,_,bel]),
+    inList(Kortej,[_,_,sin]),
+    inList(Kortej,[_,_,zel]),
+    not(inList(Kortej,[valya,bel,_])),
+    not(inList(Kortej,[valya,_,bel])),
+    not(inList(Kortej,[nastya,Y,Y])),
+    write(Kortej),
+    !.
+%6 На заводе работали три друга: слесарь, токарь и сварщик. Их фамилии Борисов, Иванов и Семенов. У слесаря нет ни братьев, ни сестер. Он
+%самый младший из друзей. Семенов, женатый на сестре Борисова, старше токаря. Назвать фамилии слесаря, токаря и сварщика.
+task6:- 
+    Kortej=[_,_,_],
+    inList(Kortej,[slesar,_,0,0,_]),
+    inList(Kortej,[tokar,_,_,1,_]),
+    inList(Kortej,[svarshick,_,_,_,_]),
+    inList(Kortej,[_,semenov,_,2,borisov]),
+    inList(Kortej,[_,ivanov,_,_,_]),
+    inList(Kortej,[_,borisov,1,_,_]),
+    write(Kortej),
+    !.
