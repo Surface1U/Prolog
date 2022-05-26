@@ -146,6 +146,74 @@ task6:-
     write(Kortej),
     !.
 
+%7 В бутылке, стакане, кувшине и банке находятся молоко, лимонад, квас и вода. Известно, что вода и молоко не в бутылке, 
+% сосуд с лимонадом находится между кувшином и сосудом с квасом, в банке - не лимонад и не вода. Стакан находится около банки и сосуда с молоком.
+% Как распределены эти жидкости по сосудам.
+right(_,_,[_]):-fail.
+right(A,B,[A|[B|_]]).
+right(A,B,[_|List]):-right(A,B,List).
+
+left(_,_,[_]):-fail.
+left(A,B,[B|[A|_]]).
+left(A,B,[_|List]):-left(A,B,List).
+
+next(A,B,List):-right(A,B,List).
+next(A,B,List):-left(A,B,List).
+
+task7:- 
+    Kortej=[_,_,_,_],
+    inList(Kortej,[bottle,_]),
+    inList(Kortej,[glass,_]),
+    inList(Kortej,[kuvshin,_]),
+    inList(Kortej,[jar,_]),
+    inList(Kortej,[_,leche]),
+    inList(Kortej,[_,lemonade]),
+    inList(Kortej,[_,kvas]),
+    inList(Kortej,[_,agua]),
+    not(inList(Kortej,[bottle,leche])),
+    not(inList(Kortej,[bottle,agua])),
+    not(inList(Kortej,[jar,lemonade])),
+    not(inList(Kortej,[jar,agua])),
+    right([kuvshin,_],[_,lemonade],Kortej),
+    right([_,lemonade],[_,kvas],Kortej),
+    next([glass,_],[jar,_],Kortej),
+    next([glass,_],[_,leche],Kortej),
+    write(Kortej),
+    !.
+%8 
+/*
+Воронов, Павлов, Левицкий и Сахаров – четыре талантли-
+вых молодых человека. Один из них танцор, другой художник, третий-певец,
+а четвертый-писатель. О них известно следующее: Воронов и Левицкий си-
+дели в зале консерватории в тот вечер, когда певец дебютировал в сольном
+концерте. Павлов и писатель вместе позировали художнику. Писатель написал
+биографическую повесть о Сахарове и собирается написать о Воронове. Воро-
+нов никогда не слышал о Левицком. Кто чем занимается? */
+task8 :-
+    Kortej = [_,_,_,_],
+    inList(Kortej,[voronov,_]),
+    inList(Kortej,[pavlov,_]),
+    inList(Kortej,[levizkiy,_]),
+    inList(Kortej,[saharov,_]),
+    inList(Kortej,[_,dancer]),
+    inList(Kortej,[_,artist]),
+    inList(Kortej,[_,singer]),
+    inList(Kortej,[_,writer]),
+    not(inList(Kortej,[voronov,singer])),
+    not(inList(Kortej,[levizkiy,singer])),
+    not(inList(Kortej,[pavlov,writer])),
+    not(inList(Kortej,[pavlov,artist])),
+    not(inList(Kortej,[saharov,writer])),
+    not(inList(Kortej,[voronov,writer])),
+    (
+        inList(Kortej,[voronov,artist]), % Так как Воронов не слышал о Левицком, то он не мог его рисовать, если он является художником
+        not(inList(Kortej,[levizkiy,writer]));
+
+        not(inList(Kortej,[voronov,artist])) % иначе
+    ),
+    write(Kortej),
+    !.
+
 %9
 /*
 Три друга заняли первое, второе, третье места в соревнова-
