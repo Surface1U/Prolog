@@ -145,3 +145,29 @@ task6:-
     inList(Kortej,[_,borisov,1,_,_]),
     write(Kortej),
     !.
+
+%9
+/*
+Три друга заняли первое, второе, третье места в соревнова-
+ниях универсиады. Друзья разной национальности, зовут их по-разному, и лю-
+бят они разные виды спорта. Майкл предпочитает баскетбол и играет лучше,
+чем американец. Израильтянин Саймон играет лучше теннисиста. Игрок в кри-
+кет занял первое место. Кто является австралийцем? Каким спортом увлека-
+ется Ричард?*/
+task9:- 
+    Kortej = [_,_,_],
+    inList(Kortej,[maikl,_,basket,A]),
+    inList(Kortej,[saimon,israel,_,C]),
+    inList(Kortej,[_,_,cricket,1]),
+    inList(Kortej,[richard,_,_,_]),
+    inList(Kortej,[_,_,tenis,D]),
+    inList(Kortej,[_,american,_,B]),
+    inList(Kortej,[_,australian,_,_]),
+    inList(Kortej,[_,_,_,2]),
+    inList(Kortej,[_,_,_,3]),
+    not(inList(Kortej,[maikl,american,_,_])),
+    not(inList(Kortej,[saimon,_,tenis,_])),
+    A<B,
+    C<D,
+    write(Kortej),
+    !.
