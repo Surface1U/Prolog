@@ -118,3 +118,35 @@ task14:-
 		writeFirstAndLastThree(Str),!;
 		writeNTimesFirst(Str,N)
 	),!.
+	
+	%1.5 Дана строка. Показать номера символов, совпадающих с последним символом строки.
+getNumberOfCharsThatLikeLast(Str,ListNumbers):-cutLastChar(Str,_,LastChar),getNumberOfCharsLikeThat(Str,ListNumbers,LastChar),!.
+getNumberOfCharsLikeThat(Str,ListNumbers,LastChar):-getNumberOfCharsLikeThat(Str,ListNumbers,LastChar,0),!.
+getNumberOfCharsLikeThat([],ListNumbers,LastChar,I):-makeEmptyList(ListNumbers),!.
+getNumberOfCharsLikeThat([StrH|StrT],ListNumbers,LastChar,I):-
+	I1 is I+1,
+	(
+	StrH = LastChar,
+
+	getNumberOfCharsLikeThat(StrT,ListNumbers1,LastChar,I1),
+	append([I1],ListNumbers1,ListNumbers),!;
+
+	getNumberOfCharsLikeThat(StrT,ListNumbers,LastChar,I1),!
+	).
+
+task15:-readS(Str,N,0),getNumberOfCharsThatLikeLast(Str,ListNumbers),writeList(ListNumbers),!.
+%2.1 Дан файл. Прочитать из файла строки и вывести длину наибольшей строки.
+getMaxLengthStr(ListStr,MaxLength):-getMaxLengthStr(ListStr,MaxLength,-1).
+getMaxLengthStr([],MaxLength,NowMax):- MaxLength is NowMax,!.
+getMaxLengthStr([ListStrH|ListStrT],MaxLength,NowMax):-
+	listLength(ListStrH, Length),
+	(
+		Length > NowMax,
+
+		getMaxLengthStr(ListStrT,MaxLength,Length);
+
+		getMaxLengthStr(ListStrT,MaxLength,NowMax)
+	),!.
+
+task21:-see('C:/Users/Alexander/Desktop/21.txt'),readListS(ListStr),getMaxLengthStr(ListStr,MaxLength),seen,
+	tell('C:/Users/Alexander/Desktop/21АУ.txt'),write(MaxLength),told.
