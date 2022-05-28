@@ -171,3 +171,47 @@ isThisCharInStr([StrH|StrT],Char):-!,
 
 task22:-see('C:/Users/Alexander/Desktop/22.txt'),readListS(ListStr),getCountOfStrWithoutSpace(ListStr,Count),seen,
 	tell('C:/Users/Alexander/Desktop/22АУ.txt'),write(Count),told,!.
+	% 2.3 Дан файл, найти и вывести в новый файл только те строки, в которых
+% букв А больше, чем в среднем на строку.
+getCountOfCharsLikeThat(Str,Char,Count):-
+	getNumberOfCharsLikeThat(Str,IndexList,Char),
+	listLength(IndexList,Count),!.
+
+getCountOfCharInListStr([],Char,CountOfA):-CountOfA is 0.
+getCountOfCharInListStr([ListStrH|ListStrT],Char,CountOfA):-
+	getCountOfCharsLikeThat(ListStrH,Char,Count),
+	getCountOfCharInListStr(ListStrT,Char,CountOfA1),
+	CountOfA is CountOfA1+Count,!.
+
+getListOfStrWhereCountOfCharMoreThenThis([],Char,ThisCount,NewList):-makeEmptyList(NewList),!.
+getListOfStrWhereCountOfCharMoreThenThis([ListStrH|ListStrT],Char,ThisCount,NewList):-
+	getCountOfCharsLikeThat(ListStrH,Char,CountOfA),
+	(
+		CountOfA>ThisCount,
+		getListOfStrWhereCountOfCharMoreThenThis(ListStrT,Char,ThisCount,NewList1),
+		append([ListStrH],NewList1,NewList);
+
+		getListOfStrWhereCountOfCharMoreThenThis(ListStr,Char,ThisCount,NewList)
+	),!.
+
+getListOfStrWhereMoreAThenAvgOfA(ListStr,NewList):-
+	getCountOfCharInListStr(ListStr,65,CountOfA),
+	listLength(ListStr,Length),
+	AvgOfA is CountOfA/Length,
+	getListOfStrWhereCountOfCharMoreThenThis(ListStr,65,AvgOfA,NewList),!.
+
+task23:-see('C:/Users/Alexander/Desktop/23.txt'),readListS(ListStr),getListOfStrWhereMoreAThenAvgOfA(ListStr,NewList),seen,
+	tell('C:/Users/Alexander/Desktop/23АУ.txt'),writeListS(NewList),told.
+%2.4 Дан файл, вывести самое частое слово.
+getMostRatedWordFromListStr(ListStr,Word):-
+	getListOfWordsFromListStr(ListStr,WordsList),
+	mostRatedWordFromList(WordsList,Word).
+
+getListOfWordsFromListStr([],WordsList):-makeEmptyList(WordsList),!.
+getListOfWordsFromListStr([ListStrH|ListStrT],WordsList):-
+	getListOfWordsFromStr(ListStrH,WordsList1),
+	getListOfWordsFromListStr(ListStrT,WordsList2),
+	append(WordsList1,WordsList2,WordsList),!.
+
+task24:-see('C:/Users/Alexander/Desktop/24.txt'),readListS(ListStr),getMostRatedWordFromListStr(ListStr,Word),seen,
+	tell('C:/Users/Alexander/Desktop/24АУ.txt'),writeS(Word),told.
