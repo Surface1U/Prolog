@@ -150,3 +150,24 @@ getMaxLengthStr([ListStrH|ListStrT],MaxLength,NowMax):-
 
 task21:-see('C:/Users/Alexander/Desktop/21.txt'),readListS(ListStr),getMaxLengthStr(ListStr,MaxLength),seen,
 	tell('C:/Users/Alexander/Desktop/21АУ.txt'),write(MaxLength),told.
+
+%2.2 Дан файл. Определить, сколько в файле строк, не содержащих пробелы.
+getCountOfStrWithoutSpace([],Count):- Count is 0,!.
+getCountOfStrWithoutSpace([ListStrH|ListStrT],Count):-
+	isThisCharInStr(ListStrH,32),
+
+	getCountOfStrWithoutSpace(ListStrT,Count),!;
+
+	getCountOfStrWithoutSpace(ListStrT,Count1),
+	Count is Count1+1,!.
+
+isThisCharInStr([],Char):-fail,!.
+isThisCharInStr([StrH|StrT],Char):-!,
+	(
+		StrH = Char;
+
+		isThisCharInStr(StrT,Char)
+	),!.
+
+task22:-see('C:/Users/Alexander/Desktop/22.txt'),readListS(ListStr),getCountOfStrWithoutSpace(ListStr,Count),seen,
+	tell('C:/Users/Alexander/Desktop/22АУ.txt'),write(Count),told,!.
